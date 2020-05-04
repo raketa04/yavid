@@ -106,8 +106,8 @@ public class KDListServiceImpl implements KDListService {
 
     @Override
     @Transactional(transactionManager="workbaseTransactionManager")
-    public List<KDList> getKdListByUser(int idUser) {
-        return  StreamSupport.stream(kdListRepository.findByUser_Id(idUser).spliterator(), false)
-                .collect(Collectors.toList());
+    public KDList getKdListByUser(int idUser) {
+        Optional<KDList> kdList = kdListRepository.findByUser_Id(idUser);
+        return kdList.isPresent() ? kdList.get() : null;
     }
 }

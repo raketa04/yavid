@@ -2,6 +2,7 @@ package by.yavid.Entity.Yavid;
 
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,14 +10,50 @@ import javax.persistence.Table;
 @Table(name = "VARIANTI")
 public class Variant {
 
-    @Column(name="NAME_MAT")
-    String name;
+    @EmbeddedId
+    private CodVariant codVariant;
 
-    @Column(name="NAME_MAT")
-    String memo;
+    @Column(name="DES")
+    private String name;
 
-    @Column(name="NAME_MAT")
-    String memo1;
+    @Column(name="MEMO")
+    private String memo;
 
+    public Variant() {
+    }
+
+    public CodVariant getCodVariant() {
+        return codVariant;
+    }
+
+    public void setCodVariant(CodVariant codVariant) {
+        this.codVariant = codVariant;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    public String getParametrFromVariant(int number){
+        String[] parametrs = memo.split("\t");
+        if(parametrs.length < number) {
+            return parametrs[number];
+        }
+        else {
+            return "";
+        }
+    }
 
 }

@@ -24,7 +24,7 @@ import java.util.Properties;
         entityManagerFactoryRef = "BazisBaseMaterialEntityManagerFactory",
         transactionManagerRef = "bazisBaseMaterialTransactionManager"
 )
-public class BazisBaseMaterial {
+public class BazisBaseMaterialSourceConfig {
     @Autowired
     private Environment env;
 

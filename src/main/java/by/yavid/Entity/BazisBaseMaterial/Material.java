@@ -11,11 +11,21 @@ public class Material {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID_M")
-    Integer id;
+    private Integer id;
 
     @Column(name="NAME_MAT")
-    String nameMaterial;
+    private String nameMaterial;
 
+    @Column(name="ARTICLE")
+    private String codMaterial;
+
+    public Material() {
+    }
+
+    public Material(String nameMaterial, String codMaterial) {
+        this.nameMaterial = nameMaterial;
+        this.codMaterial = codMaterial;
+    }
 
     public Integer getId() {
         return id;
@@ -33,5 +43,13 @@ public class Material {
         this.nameMaterial = nameMaterial;
     }
 
+
+    public String getCodMaterial() {
+        return codMaterial;
+    }
+
+    public void setCodMaterial(String codMaterial) {
+        this.codMaterial = codMaterial;
+    }
 }
 

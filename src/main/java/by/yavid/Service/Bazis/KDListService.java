@@ -14,6 +14,6 @@ public interface KDListService {
     public KDList getKdList(String numberKD);
     public KDList getKdList(Integer id);
     public List<KDList> getAllKdList();
-    public List<KDList> getKdListByUser(int idUser);
+    public KDList getKdListByUser(int idUser);
 
 }
