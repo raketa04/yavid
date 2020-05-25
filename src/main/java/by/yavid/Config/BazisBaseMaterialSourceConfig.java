@@ -22,7 +22,7 @@ import java.util.Properties;
 @EnableJpaRepositories(
         basePackages = "by.yavid.Repository.BazisBaseMaterial",
         entityManagerFactoryRef = "BazisBaseMaterialEntityManagerFactory",
-        transactionManagerRef = "bazisBaseMaterialTransactionManager"
+        transactionManagerRef = "BazisBaseMaterialTransactionManager"
 )
 public class BazisBaseMaterialSourceConfig {
     @Autowired

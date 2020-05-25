@@ -48,7 +48,7 @@ public class Variant {
 
     public String getParametrFromVariant(int number){
         String[] parametrs = memo.split("\t");
-        if(parametrs.length < number) {
+        if(parametrs.length > number) {
             return parametrs[number];
         }
         else {

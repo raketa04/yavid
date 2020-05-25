@@ -16,15 +16,20 @@ public class Material {
     @Column(name="NAME_MAT")
     private String nameMaterial;
 
+    @ManyToOne
+    @JoinColumn(name="ID_GRM")
+    private GroupMaterial groupMaterial;
+
     @Column(name="ARTICLE")
     private String codMaterial;
 
     public Material() {
     }
 
-    public Material(String nameMaterial, String codMaterial) {
+    public Material(String nameMaterial, String codMaterial,GroupMaterial groupMaterial) {
         this.nameMaterial = nameMaterial;
         this.codMaterial = codMaterial;
+        this.groupMaterial = groupMaterial;
     }
 
     public Integer getId() {
@@ -50,6 +55,14 @@ public class Material {
 
     public void setCodMaterial(String codMaterial) {
         this.codMaterial = codMaterial;
+    }
+
+    public GroupMaterial getGroupMaterial() {
+        return groupMaterial;
+    }
+
+    public void setGroupMaterial(GroupMaterial groupMaterial) {
+        this.groupMaterial = groupMaterial;
     }
 }
 
