@@ -1,5 +1,8 @@
 package by.yavid.Entity.BazisBaseMaterial;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -16,20 +19,32 @@ public class Material {
     @Column(name="NAME_MAT")
     private String nameMaterial;
 
-    @ManyToOne
-    @JoinColumn(name="ID_GRM")
-    private GroupMaterial groupMaterial;
 
     @Column(name="ARTICLE")
     private String codMaterial;
 
+    @ManyToOne
+    @JoinColumn(name="ID_GRM")
+    private GroupMaterial groupMaterial;
+
+    @OneToOne(mappedBy = "material",cascade=CascadeType.ALL)
+    private MaterialAdvance materialAdvance;
+
+
     public Material() {
     }
 
-    public Material(String nameMaterial, String codMaterial,GroupMaterial groupMaterial) {
+    public Material(String nameMaterial, String codMaterial, GroupMaterial groupMaterial) {
         this.nameMaterial = nameMaterial;
         this.codMaterial = codMaterial;
         this.groupMaterial = groupMaterial;
+    }
+
+    public Material(String nameMaterial, String codMaterial, GroupMaterial groupMaterial,MaterialAdvance materialAdvance) {
+        this.nameMaterial = nameMaterial;
+        this.codMaterial = codMaterial;
+        this.groupMaterial = groupMaterial;
+        this.materialAdvance = materialAdvance;
     }
 
     public Integer getId() {
@@ -63,6 +78,14 @@ public class Material {
 
     public void setGroupMaterial(GroupMaterial groupMaterial) {
         this.groupMaterial = groupMaterial;
+    }
+
+    public MaterialAdvance getMaterialAdvance() {
+        return materialAdvance;
+    }
+
+    public void setMaterialAdvance(MaterialAdvance materialAdvance) {
+        this.materialAdvance = materialAdvance;
     }
 }
 

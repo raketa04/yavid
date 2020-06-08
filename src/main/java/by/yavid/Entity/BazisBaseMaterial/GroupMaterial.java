@@ -23,14 +23,19 @@ public class GroupMaterial {
     private Set<Material>  materials = new HashSet<>();
 
     @ManyToOne
+    @JoinColumn(name="ID_TM")
+    private TypeMaterial typeMaterial;
+
+    @ManyToOne
     @JoinColumn(name="ENTRY")
     private GroupMaterial groupMaterial;
 
     public GroupMaterial() {
     }
 
-    public GroupMaterial(String nameGroup, GroupMaterial groupMaterial) {
+    public GroupMaterial(String nameGroup, TypeMaterial typeMaterial, GroupMaterial groupMaterial) {
         this.nameGroup = nameGroup;
+        this.typeMaterial = typeMaterial;
         this.groupMaterial = groupMaterial;
     }
 
@@ -64,5 +69,13 @@ public class GroupMaterial {
 
     public void setGroupMaterial(GroupMaterial groupMaterial) {
         this.groupMaterial = groupMaterial;
+    }
+
+    public TypeMaterial getTypeMaterial() {
+        return typeMaterial;
+    }
+
+    public void setTypeMaterial(TypeMaterial typeMaterial) {
+        this.typeMaterial = typeMaterial;
     }
 }
