@@ -80,8 +80,10 @@ public class SyncWith3CadServiceImpl implements SyncWith3CadService {
                 GroupMaterial groupMaterial = groupMaterialService.GetGroupMaterialByName("01. Листовые материалы");
                 Material material = new Material(variant.getName(),variant.getParametrFromVariant(41),groupMaterial);
                 material = materialService.AddMaterial(material);
-                MaterialAdvance materialAdvance = new MaterialAdvance(material.getId(),material,Double.valueOf(variant.getParametrFromVariant(4)));
-                materialAdvanceService.AddMaterialAdvance(materialAdvance);
+                if (!variant.getParametrFromVariant(4).equals("")){
+                    MaterialAdvance materialAdvance = new MaterialAdvance(material.getId(),Double.valueOf(variant.getParametrFromVariant(4)));
+                    materialAdvanceService.AddMaterialAdvance(materialAdvance);
+                }
             }
         }
     }
@@ -98,7 +100,7 @@ public class SyncWith3CadServiceImpl implements SyncWith3CadService {
                 GroupMaterial groupMaterial = groupMaterialService.GetGroupMaterialByName(model.getNameModel());
                 Material material = new Material(variant.getName(),variant.getCodVariant().getCodOpz(),groupMaterial);
                 material = materialService.AddMaterial(material);
-                MaterialAdvance materialAdvance = new MaterialAdvance(material.getId(),material,Double.valueOf(variant.getParametrFromVariant(1)));
+                MaterialAdvance materialAdvance = new MaterialAdvance(material.getId(),Double.valueOf(variant.getParametrFromVariant(1)));
                 materialAdvanceService.AddMaterialAdvance(materialAdvance);
             }
         }
@@ -107,5 +109,7 @@ public class SyncWith3CadServiceImpl implements SyncWith3CadService {
     @Override
     public void SyncFurniture() {
         List<Variant> variants = variantService.GetVariantsByCodVar("material");
+
+
     }
 }

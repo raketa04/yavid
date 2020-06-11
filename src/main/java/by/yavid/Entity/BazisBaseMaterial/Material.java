@@ -27,7 +27,7 @@ public class Material {
     @JoinColumn(name="ID_GRM")
     private GroupMaterial groupMaterial;
 
-    @OneToOne(mappedBy = "material",cascade=CascadeType.ALL)
+    @OneToOne(mappedBy = "material",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
     private MaterialAdvance materialAdvance;
 
 

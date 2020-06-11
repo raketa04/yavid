@@ -16,7 +16,7 @@ public class MaterialAdvance {
     private Integer id;
 
     @OneToOne
-    @PrimaryKeyJoinColumn(name="ID_M", referencedColumnName="ID_M")
+    @JoinColumn(name = "ID_M")
     private Material material;
 
     @Column(name="THICKNESS")
@@ -25,9 +25,8 @@ public class MaterialAdvance {
     public MaterialAdvance() {
     }
 
-    public MaterialAdvance(Integer id,Material material, double thickness) {
+    public MaterialAdvance(Integer id, double thickness) {
         this.id = id;
-        this.material = material;
         this.thickness = thickness;
     }
 
