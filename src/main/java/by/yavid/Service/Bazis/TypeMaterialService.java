@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TypeMaterialService {
+    private TypeMaterialRepository typeMaterialRepository;
 
-    @Autowired
-    TypeMaterialRepository typeMaterialRepository;
+    public TypeMaterialService(TypeMaterialRepository typeMaterialRepository) {
+        this.typeMaterialRepository = typeMaterialRepository;
+    }
 
     @Transactional(transactionManager="BazisBaseMaterialTransactionManager")
     public TypeMaterial getTypeMaterialFromNameType(String nameType){

@@ -16,8 +16,11 @@ import java.util.List;
 @RequestMapping("product")
 public class GroupMCController {
 
-    @Autowired
-    GroupMCService groupMCService;
+    private GroupMCService groupMCService;
+
+    public GroupMCController(GroupMCService groupMCService) {
+        this.groupMCService = groupMCService;
+    }
 
     @GetMapping("all")
     @JsonView(GroupMC.GetGroupMC.class)

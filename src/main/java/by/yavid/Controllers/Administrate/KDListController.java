@@ -22,11 +22,13 @@ import java.util.List;
 @RestController
 public class KDListController {
 
-    @Autowired
     private KDListService kdListService;
-
-    @Autowired
     private FilesBazisKDService filesBazisKDService;
+
+    public KDListController(KDListService kdListService, FilesBazisKDService filesBazisKDService) {
+        this.kdListService = kdListService;
+        this.filesBazisKDService = filesBazisKDService;
+    }
 
     @RequestMapping(value = "kd/create", method = RequestMethod.GET)
     public ResponseEntity<Integer> getNewKDList() {

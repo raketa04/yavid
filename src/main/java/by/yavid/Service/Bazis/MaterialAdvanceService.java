@@ -9,8 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MaterialAdvanceService {
 
-    @Autowired
-    MaterialAdvanceRepository materialAdvanceRepository;
+    private MaterialAdvanceRepository materialAdvanceRepository;
+
+    public MaterialAdvanceService(MaterialAdvanceRepository materialAdvanceRepository) {
+        this.materialAdvanceRepository = materialAdvanceRepository;
+    }
 
     @Transactional(transactionManager="BazisBaseMaterialTransactionManager")
     public MaterialAdvance AddMaterialAdvance(MaterialAdvance materialAdvance){

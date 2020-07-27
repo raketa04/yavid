@@ -16,7 +16,9 @@ public class SyncBaseMaterialJob implements Job {
     SyncWith3CadService syncWith3CadService;
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        syncWith3CadService.SyncMaterial();
-        syncWith3CadService.SyncFasad();
+        //syncWith3CadService.SyncMaterial();
+        //syncWith3CadService.SyncFasad();
+        //syncWith3CadService.SyncHandles();
+        //syncWith3CadService.SyncFurniture();
     }
 }

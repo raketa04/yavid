@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class VariantServiceImpl implements VariantService {
 
-    @Autowired
-    VariantRepository variantRepository;
+    private VariantRepository variantRepository;
+
+    public VariantServiceImpl(VariantRepository variantRepository) {
+        this.variantRepository = variantRepository;
+    }
 
     @Transactional(transactionManager="yavidTransactionManager")
     @Override

@@ -11,8 +11,11 @@ import java.util.List;
 @Service
 public class GroupMaterialServiceImpl implements GroupMaterialService {
 
-    @Autowired
-    GroupMaterialRepository groupMaterialRepository;
+    private GroupMaterialRepository groupMaterialRepository;
+
+    public GroupMaterialServiceImpl(GroupMaterialRepository groupMaterialRepository) {
+        this.groupMaterialRepository = groupMaterialRepository;
+    }
 
     @Transactional(transactionManager="BazisBaseMaterialTransactionManager")
     @Override

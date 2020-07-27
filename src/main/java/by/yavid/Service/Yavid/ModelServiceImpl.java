@@ -13,8 +13,11 @@ import java.util.List;
 @Service
 public class ModelServiceImpl implements ModelService  {
 
-    @Autowired
-    ModelRepository modelRepository;
+    private ModelRepository modelRepository;
+
+    public ModelServiceImpl(ModelRepository modelRepository) {
+        this.modelRepository = modelRepository;
+    }
 
     @Transactional(transactionManager="yavidTransactionManager")
     @Override

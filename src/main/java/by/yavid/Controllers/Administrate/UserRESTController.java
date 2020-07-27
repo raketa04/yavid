@@ -13,8 +13,13 @@ import java.util.List;
 
 @RestController
 public class UserRESTController {
-    @Autowired
+
     private UserService userService;
+
+    public UserRESTController(UserService userService) {
+        this.userService = userService;
+    }
+
     @RequestMapping("user")
     @JsonView(User.getUser.class)
     @ResponseBody

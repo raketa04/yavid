@@ -30,11 +30,13 @@ import java.util.stream.StreamSupport;
 @Service
 public class KDListServiceImpl implements KDListService {
 
-    @Autowired
     private Environment env;
+    private KDListRepository kdListRepository;
 
-    @Autowired
-    KDListRepository kdListRepository;
+    public KDListServiceImpl(Environment env, KDListRepository kdListRepository) {
+        this.env = env;
+        this.kdListRepository = kdListRepository;
+    }
 
     @Transactional(transactionManager="workbaseTransactionManager")
     @Override

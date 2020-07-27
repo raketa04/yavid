@@ -9,8 +9,11 @@ import java.util.List;
 @Service
 public class GroupMCServiceImpl implements GroupMCService {
 
-    @Autowired
-    GroupMCRepository groupMCRepository;
+    private GroupMCRepository groupMCRepository;
+
+    public GroupMCServiceImpl(GroupMCRepository groupMCRepository) {
+        this.groupMCRepository = groupMCRepository;
+    }
 
     @Override
     public List<GroupMC> getTypeProduction() {

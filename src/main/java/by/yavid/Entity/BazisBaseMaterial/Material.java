@@ -27,6 +27,10 @@ public class Material {
     @JoinColumn(name="ID_GRM")
     private GroupMaterial groupMaterial;
 
+    @ManyToOne
+    @JoinColumn(name="ID_MS")
+    private Measure measure;
+
     @OneToOne(mappedBy = "material",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
     private MaterialAdvance materialAdvance;
 
@@ -47,6 +51,13 @@ public class Material {
         this.materialAdvance = materialAdvance;
     }
 
+    public Material(String nameMaterial, String codMaterial, GroupMaterial groupMaterial, Measure measure) {
+        this.nameMaterial = nameMaterial;
+        this.codMaterial = codMaterial;
+        this.groupMaterial = groupMaterial;
+        this.measure = measure;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -62,7 +73,6 @@ public class Material {
     public void setNameMaterial(String nameMaterial) {
         this.nameMaterial = nameMaterial;
     }
-
 
     public String getCodMaterial() {
         return codMaterial;
@@ -86,6 +96,14 @@ public class Material {
 
     public void setMaterialAdvance(MaterialAdvance materialAdvance) {
         this.materialAdvance = materialAdvance;
+    }
+
+    public Measure getMeasure() {
+        return measure;
+    }
+
+    public void setMeasure(Measure measure) {
+        this.measure = measure;
     }
 }
 

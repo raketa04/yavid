@@ -13,12 +13,14 @@ import java.io.*;
 @Service
 public class FilesBazisKDServiceImpl implements FilesBazisKDService {
 
-    @Autowired
     private FilesBazisKDRepository filesBazisKDRepository;
 
-    @Autowired
     private Environment env;
 
+    public FilesBazisKDServiceImpl(FilesBazisKDRepository filesBazisKDRepository, Environment env) {
+        this.filesBazisKDRepository = filesBazisKDRepository;
+        this.env = env;
+    }
 
     @Override
     public FilesBazisKD saveFileKDBazis(MultipartFile uploadedFileRef, KDList kdList) {

@@ -9,8 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class MaterialServiceImpl implements MaterialService {
 
-    @Autowired
-    MaterialRepository materialRepository;
+    private MaterialRepository materialRepository;
+
+    public MaterialServiceImpl(MaterialRepository materialRepository) {
+        this.materialRepository = materialRepository;
+    }
 
     @Transactional(transactionManager="BazisBaseMaterialTransactionManager")
     @Override

@@ -18,7 +18,7 @@ public class QuartzSubmitJobs {
 
     @Bean(name = "SyncBaseMaterialStatsTrigger")
     public SimpleTriggerFactoryBean triggerMemberStats(@Qualifier("SyncBaseMaterialStats") JobDetail jobDetail) {
-        return QuartzConfig.createTrigger(jobDetail, 60000, "Member Statistics Trigger");
+        return QuartzConfig.createTrigger(jobDetail, 120000, "Member Statistics Trigger");
     }
 }
 
