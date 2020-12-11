@@ -25,8 +25,12 @@ import java.util.Properties;
         transactionManagerRef = "ecadmasterTransactionManager"
 )
 public class EcadmasterDataSourceConfig {
-    @Autowired
+
     private Environment env;
+
+    public EcadmasterDataSourceConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     @ConfigurationProperties(prefix="datasource.ecadmaster")
@@ -40,8 +44,6 @@ public class EcadmasterDataSourceConfig {
         return DataSourceBuilder.create()
                 .driverClassName(ecadmasterDataSourceProperties.getDriverClassName())
                 .url(ecadmasterDataSourceProperties.getUrl())
-                .username(ecadmasterDataSourceProperties.getUsername())
-                .password(ecadmasterDataSourceProperties.getPassword())
                 .build();
     }
 

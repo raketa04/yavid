@@ -1,4 +1,4 @@
-package by.yavid.Job;
+package by.yavid.Service.Job;
 
 import by.yavid.Service.Bazis.SyncWith3CadService;
 import org.quartz.DisallowConcurrentExecution;

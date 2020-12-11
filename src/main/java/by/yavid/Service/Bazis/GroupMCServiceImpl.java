@@ -1,8 +1,8 @@
 package by.yavid.Service.Bazis;
 
+import by.yavid.Exception.ThereIsNoSuchGroupMCException;
 import by.yavid.Entity.Workbase.Bazis.GroupMC;
 import by.yavid.Repository.Workbase.Bazis.GroupMCRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +17,6 @@ public class GroupMCServiceImpl implements GroupMCService {
 
     @Override
     public List<GroupMC> getTypeProduction() {
-        return groupMCRepository.findBycMainGr(9);
+        return groupMCRepository.findBycMainGr(9).orElseThrow(()-> new ThereIsNoSuchGroupMCException());
     }
 }

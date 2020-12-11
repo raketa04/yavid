@@ -34,6 +34,15 @@ public class User {
     @OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval=true)
     private Set<KDList> kd = new HashSet<>();
 
+    public User() {
+    }
+
+    public User(Integer id, String fio, String userName) {
+        this.id =id;
+        this.fio = fio;
+        this.userName = userName;
+    }
+
     public String getUserName() {
         return userName;
     }

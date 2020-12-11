@@ -1,5 +1,6 @@
 package by.yavid.Config;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,8 +30,11 @@ import java.util.Properties;
 )
 public class WorkbaseDataSourceConfig {
 
-    @Autowired
     private Environment env;
+
+    public WorkbaseDataSourceConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public MultipartConfigElement multipartConfigElement() {
@@ -49,12 +53,12 @@ public class WorkbaseDataSourceConfig {
     @Bean
     public DataSource workbaseDataSource() {
         DataSourceProperties workbaseDataSourceProperties = workbaseDataSourceProperties();
-        return DataSourceBuilder.create()
+        HikariDataSource dataSource = (HikariDataSource) DataSourceBuilder.create()
                 .driverClassName(workbaseDataSourceProperties.getDriverClassName())
                 .url(workbaseDataSourceProperties.getUrl())
-                .username(workbaseDataSourceProperties.getUsername())
-                .password(workbaseDataSourceProperties.getPassword())
                 .build();
+        dataSource.setConnectionTestQuery("SELECT 1");
+        return dataSource;
     }
 
     @Bean

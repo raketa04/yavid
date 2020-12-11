@@ -25,8 +25,12 @@ import java.util.Properties;
         transactionManagerRef = "BazisBaseMaterialTransactionManager"
 )
 public class BazisBaseMaterialSourceConfig {
-    @Autowired
+
     private Environment env;
+
+    public BazisBaseMaterialSourceConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     @ConfigurationProperties(prefix="datasource.basematerial")

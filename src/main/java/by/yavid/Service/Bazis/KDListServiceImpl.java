@@ -46,9 +46,8 @@ public class KDListServiceImpl implements KDListService {
 
     @Override
     public Integer getNewKD() {
-        try{
-            File file  = new File(env.getProperty("file.SetComboBox"));
-
+        try {
+            File file = new File(env.getProperty("file.SetComboBox"));
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(file);
@@ -60,7 +59,6 @@ public class KDListServiceImpl implements KDListService {
                     .item(0);
             Integer kd = Integer.parseInt(node.getNodeValue()) + 1;
             node.setNodeValue(kd.toString());
-
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
@@ -70,19 +68,17 @@ public class KDListServiceImpl implements KDListService {
             transformer.transform(source, result);
 
             FileOutputStream fos = new FileOutputStream(file);
-            OutputStreamWriter osw = new OutputStreamWriter( fos, "windows-1251");
-            BufferedWriter buffWriter = new BufferedWriter( osw );
+            OutputStreamWriter osw = new OutputStreamWriter(fos, "windows-1251");
+            BufferedWriter buffWriter = new BufferedWriter(osw);
             buffWriter.write(sw.toString());
             buffWriter.flush();
             buffWriter.close();
 
             return kd;
         }
-
         catch (Exception e) {
             e.printStackTrace();
-            return null;
-
+            return -1;
         }
     }
 
@@ -90,14 +86,16 @@ public class KDListServiceImpl implements KDListService {
     @Override
     public KDList getKdList(String numberKD) {
         Optional<KDList> kdList = kdListRepository.findByNumberKD(numberKD);
-        return kdList.isPresent() ? kdList.get() : null;
+        return kdList.orElse(new KDList());
     }
 
     @Override
     public KDList getKdList(Integer id) {
         Optional<KDList> kdList = kdListRepository.findById(id);
-        return kdList.isPresent() ? kdList.get() : null;
+        return kdList.orElse(new KDList());
     }
+
+
 
     @Override
     @Transactional(transactionManager="workbaseTransactionManager")
@@ -110,6 +108,6 @@ public class KDListServiceImpl implements KDListService {
     @Transactional(transactionManager="workbaseTransactionManager")
     public KDList getKdListByUser(int idUser) {
         Optional<KDList> kdList = kdListRepository.findByUser_Id(idUser);
-        return kdList.isPresent() ? kdList.get() : null;
+        return kdList.orElse(new KDList());
     }
 }

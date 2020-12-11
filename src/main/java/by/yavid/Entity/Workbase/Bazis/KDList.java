@@ -54,6 +54,15 @@ public class KDList {
     public KDList(){
     }
 
+
+    public KDList(String numberKD, String remark, GroupMC typeProduct, User user, Set<FilesBazisKD> filesBazisKDS) {
+        this.numberKD = numberKD;
+        this.remark = remark;
+        this.typeProduct = typeProduct;
+        this.user = user;
+        this.filesBazisKDS = filesBazisKDS;
+    }
+
     public Integer getId() {
         return id;
     }

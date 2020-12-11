@@ -1,6 +1,6 @@
 package by.yavid.Config;
 
-import by.yavid.Job.SyncBaseMaterialJob;
+import by.yavid.Service.Job.SyncBaseMaterialJob;
 import org.quartz.JobDetail;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

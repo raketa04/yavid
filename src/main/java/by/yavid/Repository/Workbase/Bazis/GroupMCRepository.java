@@ -4,8 +4,9 @@ import by.yavid.Entity.Workbase.Bazis.GroupMC;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GroupMCRepository extends CrudRepository<GroupMC, Integer> {
-    List<GroupMC> findBycMainGr(int cMainGr);
+    Optional<List<GroupMC>> findBycMainGr(int cMainGr);
 }
 

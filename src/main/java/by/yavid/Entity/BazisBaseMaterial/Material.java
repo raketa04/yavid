@@ -5,6 +5,8 @@ import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 
+import java.util.Objects;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -104,6 +106,22 @@ public class Material {
 
     public void setMeasure(Measure measure) {
         this.measure = measure;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Material)) return false;
+        Material material = (Material) o;
+        return Objects.equals(nameMaterial, material.nameMaterial) &&
+                Objects.equals(codMaterial, material.codMaterial) &&
+                Objects.equals(groupMaterial, material.groupMaterial) &&
+                Objects.equals(measure, material.measure);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nameMaterial, codMaterial, groupMaterial, measure);
     }
 }
 

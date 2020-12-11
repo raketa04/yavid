@@ -14,20 +14,20 @@ import java.io.*;
 public class FilesBazisKDServiceImpl implements FilesBazisKDService {
 
     private FilesBazisKDRepository filesBazisKDRepository;
-
+    private KDListService kdListService;
     private Environment env;
 
-    public FilesBazisKDServiceImpl(FilesBazisKDRepository filesBazisKDRepository, Environment env) {
+    public FilesBazisKDServiceImpl(FilesBazisKDRepository filesBazisKDRepository, KDListService kdListService, Environment env) {
         this.filesBazisKDRepository = filesBazisKDRepository;
+        this.kdListService = kdListService;
         this.env = env;
     }
 
     @Override
     public FilesBazisKD saveFileKDBazis(MultipartFile uploadedFileRef, KDList kdList) {
-        Integer revision = filesBazisKDRepository.getMaxRevision(kdList);
+        Integer revision = filesBazisKDRepository.getMaxRevision(kdList).orElse(1);
         String path = env.getProperty("directory.bazis.kd") +  kdList.getNumberKD().trim() + "\\";
-        if( revision == null){
-            revision = 1;
+        if( revision == 1){
             new File(path).mkdir();
         }
         else{
@@ -70,5 +70,29 @@ public class FilesBazisKDServiceImpl implements FilesBazisKDService {
             return false;
         }
     }
+
+    @Override
+    public String getSpecificationFor3Cad(String numberKD) {
+        if(kdListService.getKdList(numberKD) != null){
+            String path = env.getProperty("directory.3cad.specification");
+            File file = new File(path+numberKD+".txt");
+            String specification = new String();
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "windows-1251"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    specification += line + "\n";
+                }
+                return specification;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "";
+            }
+        }
+        else{
+            return "";
+        }
+    }
+
 
 }

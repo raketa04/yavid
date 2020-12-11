@@ -61,21 +61,11 @@ public class KDListController {
     }
 
 
-
-    /*@RequestMapping(value = "kd", method = RequestMethod.GET)
-    @JsonView(KDList.getKDList.class)
-    public ResponseEntity<List<KDList>> getKDList() {
-        List<KDList> list = kdListService.getAllKdList();
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-    */
-
     @RequestMapping(value = "kd/{numberKD}", method = RequestMethod.GET)
     @ResponseBody
     @JsonView(KDList.getKDList.class)
     public ResponseEntity<KDList> getKDListByIdKDList(@PathVariable String numberKD) {
         KDList kdList = kdListService.getKdList(numberKD);
-
         return new ResponseEntity<>(kdList, HttpStatus.OK);
     }
 
@@ -83,5 +73,11 @@ public class KDListController {
     @ResponseBody
     public ResponseEntity<?> createSpecificationFor3Cad(@PathVariable String numberKD,@RequestBody String specification) {
         return new ResponseEntity<>(filesBazisKDService.saveFileSpecificationFor3Cad(numberKD,specification), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "kd/{numberKD}/get_specification", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<String> getSpecificationFor3Cad(@PathVariable String numberKD) {
+        return new ResponseEntity<String>(filesBazisKDService.getSpecificationFor3Cad(numberKD), HttpStatus.OK);
     }
 }

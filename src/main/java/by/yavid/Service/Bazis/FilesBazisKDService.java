@@ -10,4 +10,5 @@ public interface FilesBazisKDService {
     public FilesBazisKD saveFileKDBazis(MultipartFile uploadedFileRef, KDList kdList);
     public File openFileKDBazis(Integer idFileKDList);
     public boolean saveFileSpecificationFor3Cad(String numberKD,String specification);
+    public String getSpecificationFor3Cad(String numberKD);
 }

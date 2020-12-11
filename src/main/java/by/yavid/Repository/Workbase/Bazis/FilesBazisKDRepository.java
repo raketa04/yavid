@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FilesBazisKDRepository extends CrudRepository<FilesBazisKD, Integer> {
     @Query("SELECT max(f.revision) FROM FilesBazisKD f WHERE f.kdList = ?1")
-    Integer getMaxRevision(KDList kdList);
+    Optional<Integer> getMaxRevision(KDList kdList);
     @Query("SELECT f.revision FROM FilesBazisKD f WHERE f.kdList = ?1")
     List<Integer> getAllRevisionsKDList(Integer idKDList);
 }

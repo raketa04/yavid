@@ -24,8 +24,12 @@ import java.util.Properties;
         transactionManagerRef = "yavidTransactionManager"
 )
 public class YavidDataSourceConfig {
-    @Autowired
+
     private Environment env;
+
+    public YavidDataSourceConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     @ConfigurationProperties(prefix="datasource.yavid")
@@ -39,8 +43,6 @@ public class YavidDataSourceConfig {
         return DataSourceBuilder.create()
                 .driverClassName(yavidDataSourceProperties.getDriverClassName())
                 .url(yavidDataSourceProperties.getUrl())
-                .username(yavidDataSourceProperties.getUsername())
-                .password(yavidDataSourceProperties.getPassword())
                 .build();
     }
 

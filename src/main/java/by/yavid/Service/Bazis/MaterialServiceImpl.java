@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class MaterialServiceImpl implements MaterialService {
 
@@ -18,16 +20,18 @@ public class MaterialServiceImpl implements MaterialService {
     @Transactional(transactionManager="BazisBaseMaterialTransactionManager")
     @Override
     public boolean isPresentCodMaterial(String codMaterial) {
-        if(materialRepository.findFirstByCodMaterial(codMaterial) == null){
-            return  false;
-        }
-        else {
-            return true;
-        }
+        if(materialRepository.findFirstByCodMaterial(codMaterial).isPresent()) return true;
+        else return false;
     }
     @Transactional(transactionManager="BazisBaseMaterialTransactionManager")
     @Override
-    public Material AddMaterial(Material material) {
+    public Material saveMaterial(Material material) {
         return materialRepository.save(material);
+    }
+
+    @Override
+    @Transactional(transactionManager="BazisBaseMaterialTransactionManager")
+    public Material getMaterialByCod(String codMaterial) {
+        return materialRepository.findFirstByCodMaterial(codMaterial).get();
     }
 }
