@@ -23,7 +23,6 @@ public class Integration1cController {
 
     @RequestMapping(value = "reports/shipped_order_from_statictic", method = RequestMethod.POST)
     public ResponseEntity<Boolean> createReportShippedOrderFromStatistic(@RequestBody List<ShippedOrder> shippedOrders) {
-
         return new ResponseEntity<>(reportShippedProductsForStatistics.report(shippedOrders), HttpStatus.OK);
     }
 }

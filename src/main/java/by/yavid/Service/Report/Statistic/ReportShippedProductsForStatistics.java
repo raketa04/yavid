@@ -1,9 +1,6 @@
 package by.yavid.Service.Report.Statistic;
 
 import by.yavid.DTO.Unf1C.ShippedOrder;
-import by.yavid.DTO.Unf1C.ShippedProducts;
-import by.yavid.DTO.Unf1C.TypeProduction;
-import by.yavid.DTO.Unf1C.Units;
 import by.yavid.Entity.Ecadmaster.ItemOrder;
 import by.yavid.Entity.Yavid.ProductInModel;
 import by.yavid.Service.Ecadmaster.OrderService;
@@ -16,9 +13,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,11 +67,11 @@ public class ReportShippedProductsForStatistics {
 
         int countComplectProductsFromKitchen = 0;
         int countOneProductsInOrderFromKitchen = 0;
-        BigDecimal priceComplectProductsFromKitchen = new BigDecimal(0);
+        float priceComplectProductsFromKitchen = 0;
 
         int countComplectProductsFromBedroom = 0;
         int countOneProductsInOrderFromBedroom = 0;
-        BigDecimal priceComplectProductsFromBedroom = new BigDecimal(0);
+        float priceComplectProductsFromBedroom = 0;
 
         int countComplectProductsFromDiningAndLivingRoom = 0;
         int countOneProductsInOrderFromDiningAndLivingRoom = 0;
@@ -89,46 +84,15 @@ public class ReportShippedProductsForStatistics {
         int countUnupholsteredChairs = 0;
         long priceChairs=0;
 
-        int countOfProductsFromKitchenInOrder;
-        int countOfProductsFromBedroomInOrder;
-        int countOfProductsFromDiningAndLivingRoomInOrder;
-        boolean manualInputFromKitchenInOrder;
-        boolean manualInputFromBedroomInOrder;
-        boolean manualInputFromDiningAndLivingRoomInOrder;
-        boolean manualInputFromHallway;
-        float rate;
-
-        List <ShippedProducts> listShippedProducts = new ArrayList<>();
-
-        listShippedProducts.add(new ShippedProducts (TypeProduction.Kitchen, Units.Kit,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.Kitchen, Units.SingleItem,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.Bedroom, Units.Kit,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.Bedroom, Units.SingleItem,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.DiningRoom, Units.Kit,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.DiningRoom, Units.SingleItem,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.Hallway, Units.Kit,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.Hallway, Units.SingleItem,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.LivingRoom, Units.Kit,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.LivingRoom, Units.SingleItem,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.Unupholstered, Units.Kit,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.Unupholstered, Units.SingleItem,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.UpholsteredChairs, Units.Kit,new BigDecimal(0)));
-        listShippedProducts.add(new ShippedProducts (TypeProduction.UpholsteredChairs, Units.SingleItem,new BigDecimal(0)));
-
         for(ShippedOrder order:orders){
-            countOfProductsFromKitchenInOrder = 0;
-            priceComplectProductsFromKitchen = BigDecimal.valueOf(0);
-            countOfProductsFromBedroomInOrder = 0;
-
-            countOfProductsFromDiningAndLivingRoomInOrder = 0;
-
-
-            manualInputFromKitchenInOrder = false;
-            manualInputFromBedroomInOrder = false;
-            manualInputFromDiningAndLivingRoomInOrder = false;
-            manualInputFromHallway = false;
-            rate = 1;
-
+            int countOfProductsFromKitchenInOrder = 0;
+            int countOfProductsFromBedroomInOrder = 0;
+            int countOfProductsFromDiningAndLivingRoomInOrder = 0;
+            boolean manualInputFromKitchenInOrder = false;
+            boolean manualInputFromBedroomInOrder = false;
+            boolean manualInputFromDiningAndLivingRoomInOrder = false;
+            boolean manualInputFromHallway = false;
+            float rate = 1;
             if(order.getCurrency()!=933) rate = rateService.getCusrRateForBYN(order.getCurrency(),order.getDateShipment());
             List<ItemOrder> itemsOrder = orderService.getItemsOrderFromOrder("YAVID",order.getNumberOrder());
             for(ItemOrder itemOrder:itemsOrder) {
@@ -166,7 +130,8 @@ public class ReportShippedProductsForStatistics {
                     priceChairs+= sumPriceDetailInItemOrder(itemOrder,componentsItemOrder,order,rate);
                     continue;
                 }
-                if(Integer.parseInt(product.getModel().getCod()) >100 && Integer.parseInt(product.getModel().getCod()) <=110){
+                if((Integer.parseInt(product.getModel().getCod()) >100 && Integer.parseInt(product.getModel().getCod()) <=110) ||
+                        Integer.parseInt(product.getModel().getCod()) ==190){
                     if (typeProduction == 8900) countOfProductsFromKitchenInOrder += itemOrder.getNumberProduct();
                     else manualInputFromKitchenInOrder = true;
                     priceComplectProductsFromKitchen += sumPriceDetailInItemOrder(itemOrder,componentsItemOrder,order,rate);
@@ -212,16 +177,12 @@ public class ReportShippedProductsForStatistics {
             else if (countOfProductsFromDiningAndLivingRoomInOrder >  0) countComplectProductsFromDiningAndLivingRoom++;
         }
 
-        FileInputStream inputStream = null;
+        FileInputStream inputStream;
         try {
-            /*File fileTemplate = new File(
-                    getClass().getClassLoader().getResource("template.xls").getFile()
-            );*/
             File fileTemplate = new File("C:\\template.xls");
             inputStream = new FileInputStream(fileTemplate);
             HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
             HSSFSheet sheet = workbook.getSheet("fdsgdf");
-
 
 
             printTextFromSheetExcel(sheet,1,String.valueOf(countUnupholsteredChairs+countUpholsteredChairs),String.valueOf(priceChairs));

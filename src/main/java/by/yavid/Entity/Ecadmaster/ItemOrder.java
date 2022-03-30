@@ -22,10 +22,10 @@ public class ItemOrder {
     @Column(name="PADRE")
     private Integer parentPositionInOrder;
 
-    @Column(name="YPR1")
+    @Column(name="YPR3")
     private Double priceRetail;
 
-    @Column(name="YPR3")
+    @Column(name="YPR1")
     private Double priceTrade;
 
     @Transient

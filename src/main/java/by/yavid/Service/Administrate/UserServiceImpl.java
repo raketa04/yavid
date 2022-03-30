@@ -3,18 +3,22 @@ package by.yavid.Service.Administrate;
 import by.yavid.Exception.ThereIsNoSuchUserException;
 import by.yavid.Entity.Workbase.Administrate.User;
 import by.yavid.Repository.Workbase.Administrate.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
 @Service
 public class UserServiceImpl implements UserService {
 
 
     private  UserRepository userRepository;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

@@ -1,6 +1,7 @@
 package by.yavid.Service.Report.Statistic;
 
-import by.yavid.DTO.Unf1C.Rate;
+import by.yavid.DTO.Unf1C.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,6 +17,7 @@ import java.util.Date;
 @Service
 public class RateService {
 
+    @Autowired
     RestTemplate restTemplatet;
 
     public RateService(RestTemplate restTemplatet) {
@@ -28,6 +30,5 @@ public class RateService {
         ResponseEntity<Rate> rateResponse = restTemplatet.exchange(url,HttpMethod.GET,null, new ParameterizedTypeReference<Rate>() {});
         Rate rate = rateResponse.getBody();
         return  rate.getCur_OfficialRate()/rate.getCur_Scale();
-
     }
 }

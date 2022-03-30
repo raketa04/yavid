@@ -6,5 +6,5 @@ import by.yavid.Entity.Workbase.Bazis.GroupMC;
 import java.util.List;
 
 public interface GroupMCService {
-    public List<GroupMC> getTypeProduction();
+    List<GroupMC> getTypeProduction();
 }

@@ -7,8 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 
 public interface FilesBazisKDService {
-    public FilesBazisKD saveFileKDBazis(MultipartFile uploadedFileRef, KDList kdList);
-    public File openFileKDBazis(Integer idFileKDList);
-    public boolean saveFileSpecificationFor3Cad(String numberKD,String specification);
-    public String getSpecificationFor3Cad(String numberKD);
+    FilesBazisKD saveFileKDBazis(MultipartFile uploadedFileRef, KDList kdList);
+    File openFileKDBazis(Integer idFileKDList);
+    boolean saveFileSpecificationFor3Cad(String numberKD,String specification);
+    String getSpecificationFor3Cad(String numberKD);
 }
