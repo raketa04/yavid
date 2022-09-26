@@ -57,8 +57,8 @@ public class KDListServiceImpl implements KDListService {
                     .item(0).getChildNodes()
                     .item(0).getChildNodes()
                     .item(0);
-            Integer kd = Integer.parseInt(node.getNodeValue()) + 1;
-            node.setNodeValue(kd.toString());
+            Integer kd = Integer.parseInt(node.getNodeValue()) ;
+            node.setNodeValue(String.valueOf(kd + 1));
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
