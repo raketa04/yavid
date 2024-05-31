@@ -27,4 +27,12 @@ public class UserRESTController {
         User user = userService.getUserByUserName(username);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+    @RequestMapping("user/all")
+    @JsonView(User.getUser.class)
+    @ResponseBody
+    public ResponseEntity<List<User>> getAllUserByUserName() {
+        List<User> list = userService.getAllUser();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }

@@ -58,7 +58,7 @@ public class ReportShippedProductsForStatistics {
         }
         else if (typePrice==2) {
             if (typeCurrency == 643 || typeCurrency ==978) return Math.round(itemOrder.getPriceTrade())*rate;
-            else return itemOrder.getPriceRetail();
+            else return itemOrder.getPriceTrade();
         }
         return 0;
     }
@@ -130,7 +130,7 @@ public class ReportShippedProductsForStatistics {
                     priceChairs+= sumPriceDetailInItemOrder(itemOrder,componentsItemOrder,order,rate);
                     continue;
                 }
-                if((Integer.parseInt(product.getModel().getCod()) >100 && Integer.parseInt(product.getModel().getCod()) <=110) ||
+                if((Integer.parseInt(product.getModel().getCod()) >=100 && Integer.parseInt(product.getModel().getCod()) <=113) ||
                         Integer.parseInt(product.getModel().getCod()) ==190){
                     if (typeProduction == 8900) countOfProductsFromKitchenInOrder += itemOrder.getNumberProduct();
                     else manualInputFromKitchenInOrder = true;
@@ -151,7 +151,7 @@ public class ReportShippedProductsForStatistics {
                     priceComplectProductsFromHallway += sumPriceDetailInItemOrder(itemOrder,componentsItemOrder,order,rate);
                     continue;
                 }
-                if(Integer.parseInt(product.getModel().getCod()) >=173 && Integer.parseInt(product.getModel().getCod()) <=179) {
+                if(Integer.parseInt(product.getModel().getCod()) >=171 && Integer.parseInt(product.getModel().getCod()) <=179) {
                     if (typeProduction == 8900) countOfProductsFromBedroomInOrder += itemOrder.getNumberProduct();
                     else manualInputFromBedroomInOrder = true;
                     priceComplectProductsFromBedroom += sumPriceDetailInItemOrder(itemOrder,componentsItemOrder,order,rate);

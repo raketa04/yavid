@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -32,7 +33,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(transactionManager="workbaseTransactionManager")
     public User getUserByUserName(String Username) {
-        return userRepository.findFirstByUserName(Username).orElse(new User(-1,"Not FIO","'Not Username"));
+        Optional<User> user  = userRepository.findByUserName(Username);
+        return user.orElse(new User(-1,"Not FIO","'Not Username"));
     }
 
     @Override

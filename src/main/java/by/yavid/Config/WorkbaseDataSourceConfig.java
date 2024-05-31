@@ -80,6 +80,7 @@ public class WorkbaseDataSourceConfig {
         jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
         jpaProperties.put("hibernate.show-sql", env.getProperty("spring.jpa.show-sql"));
         jpaProperties.put("hibernate.format_sql", env.getProperty("spring.jpa.format_sql"));
+        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.SQLServerDialect");
         factory.setJpaProperties(jpaProperties);
 
         return factory;
